@@ -258,9 +258,9 @@ func (d *DuoClient) DoAuth(tx string, inputSid string, inputCertsURL string) (si
 	}
 
 	data := uniformResourceLocator.Values{}
-	if inputSid != "" && inputCertsURL != "" {
-		data.Set("sid", inputSid)
-		data.Set("certs_url", inputCertsURL)
+	if inputSid != "" {
+		data.Set("tx", tx)
+		url = fmt.Sprintf("%s&sid=%s", url, inputSid)
 	}
 
 	req, err = http.NewRequest("POST", url, strings.NewReader(data.Encode()))
